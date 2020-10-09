@@ -5,8 +5,9 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdcommenter'
 Plug 'Nequo/vim-allomancer'
 Plug 'ayu-theme/ayu-vim'
@@ -57,11 +58,41 @@ syntax on                                                   "
 """""""""""""""""""""""""""""""""""""""
 map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let NERDTreeShowHidden=1
 
 """""""""""""""""""""""""""""""""""""""
 "          vim-airline                "
 """""""""""""""""""""""""""""""""""""""
-let g:airline_theme='luna'
+"let g:airline_theme='luna'
+" let g:airline_theme='light'
+
+"""""""""""""""""""""""""""""""""""""""
+"          lightline                  "
+"""""""""""""""""""""""""""""""""""""""
+
+let g:lightline = {
+  \ 'colorscheme': 'molokai',
+  \ 'active': {
+  \   'left': [
+  \     [ 'mode', 'paste' ], 
+  \     [ 'ctrlpmark', 'git', 'diagnostic', 'cocstatus', 'filename', 'method' ]
+  \   ],
+  \   'right':[
+  \     [ 'filetype', 'fileencoding', 'lineinfo', 'percent' ],
+  \     [ 'blame' ]
+  \   ],
+  \ },
+  \ 'component_function': {
+  \   'blame': 'LightlineGitBlame',
+  \ }
+\ }
+
+function! LightlineGitBlame() abort
+    "let blame = get(b:, 'coc_git_blame', '')
+    let blame = get(g:, 'coc_git_status', '')
+        " return blame
+    return winwidth(0) > 120 ? blame : ''
+endfunction
 
 """""""""""""""""""""""""""""""""""""""
 "           nerdcomment config        "
@@ -103,8 +134,13 @@ let g:coc_global_extensions = [
 \ 'coc-phpls',
 \ 'coc-go',
 \ 'coc-cmake',
-\ 'coc-clangd'
+\ 'coc-clangd',
+\ 'coc-git'
 \ ]
+
+" coc-go config
+autocmd FileType go nmap gtj :CocCommand go.tags.add json<cr>
+autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
 
 autocmd BufWritePre *.go :call CocAction('organizeImport')
 

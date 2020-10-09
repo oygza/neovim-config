@@ -3,12 +3,12 @@
         "go": {
             "command": "gopls",
             "rootPatterns": [
-                "go.mod"
+                "go.mod",
+                ".vim/",
+                ".git/"
             ],
             "trace.server": "verbose",
-            "filetypes": [
-                "go"
-            ]
+            "filetypes": ["go"]
         }
     }
 }
