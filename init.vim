@@ -11,7 +11,7 @@ Plug 'ayu-theme/ayu-vim'
 "Plug 'kien/ctrlp.vim'
 Plug 'hrsh7th/nvim-compe'
 Plug 'glepnir/lspsaga.nvim'
-Plug 'glepnir/dashboard-nvim'
+" Plug 'glepnir/dashboard-nvim'
 Plug 'itchyny/vim-gitbranch'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
@@ -20,6 +20,7 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive'
+Plug 'NLKNguyen/papercolor-theme'
 
 "" telescope
 Plug 'nvim-lua/popup.nvim'
@@ -53,34 +54,6 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""
 "          temp config                "
 """""""""""""""""""""""""""""""""""""""
-let g:dashboard_default_executive ='fzf'
-let g:dashboard_custom_section={
-  \ 'select_file': {
-      \ 'description': ['● Select File                    Leader F '],
-      \ 'command': 'FZF' },
-  \ 'file_history': {
-      \ 'description': ['● File History                   Leader b '],
-      \ 'command': ':History'}
-  \ }
-let g:dashboard_custom_footer=[
-            \'哈喽呀'
-\]
-let g:dashboard_custom_header=[
-    \'',
-    \'    ████▌█████▌█ ████████▐▀██▀    ',
-    \'  ▄█████ █████▌ █ ▀██████▌█▄▄▀▄   ',
-    \'  ▌███▌█ ▐███▌▌  ▄▄ ▌█▌███▐███ ▀  ',
-    \' ▐ ▐██  ▄▄▐▀█   ▐▄█▀▌█▐███▐█      ',
-    \'   ███ ▌▄█▌  ▀  ▀██  ▀██████▌     ',
-    \'    ▀█▌▀██▀ ▄         ███▐███     ',
-    \'     ██▌             ▐███████▌    ',
-    \'     ███     ▀█▀     ▐██▐███▀▌    ',
-    \'     ▌█▌█▄         ▄▄████▀ ▀      ',
-    \'       █▀██▄▄▄ ▄▄▀▀▒█▀█           ',
-    \'',
-    \]
-
-
 """""""""""" 文件显示git
 let g:NERDTreeGitStatusConcealBrackets = 1
 """""""""""" 行数显示git
@@ -94,11 +67,18 @@ let g:gitgutter_highlight_linenrs = 1
 
 " vim themes
 set termguicolors     " enable true colors support
-"let ayucolor="light"  " for light version of theme
+" set ayucolor="light"  " for light version of theme
 " let ayucolor="mirage" " for mirage version of theme
 " let ayucolor="dark"   " for dark version of theme
-colorscheme one
+" colorscheme ayu
+" set background=light
+" colorscheme molokai
+" colorscheme desertEx
+
+" set t_Co=256   " This is may or may not needed.
+
 set background=light
+colorscheme PaperColor
 
 
 
@@ -121,6 +101,7 @@ set smartindent                                             " 智能缩进
 set autoindent                                              " 自动换行缩进
 set autoindent                                              " 使用空格进行缩进
 set expandtab                                               " tab扩展为空格
+" set cursorline                                              " 高亮游标所在行
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
