@@ -44,7 +44,6 @@ let g:go_highlight_functions=1
 let g:go_highlight_function_calls=1
 "let g:go_metalinter_enabled=['vet', 'golint', 'errcheck']
 "let g:go_metalinter_autosave=1
-autocmd FileType go nmap <leader>z  <Plug>(go-run)
 
 
 
@@ -432,7 +431,8 @@ EOF
 nnoremap <leader>F <cmd>Telescope find_files<cr>
 nnoremap <leader>b <cmd>Telescope buffers<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>z <cmd>Telescope lsp_document_symbols<cr>
+
+nnoremap <leader>z <cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown({symbols="method"}))<cr>
 
 
 
