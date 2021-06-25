@@ -21,6 +21,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'mhartington/oceanic-next'
 
 "" telescope
 Plug 'nvim-lua/popup.nvim'
@@ -65,7 +66,10 @@ let g:gitgutter_highlight_linenrs = 1
 """""""""""""""""""""""""""""""""""""""
 
 " vim themes
-set termguicolors     " enable true colors support
+if (has("termguicolors"))
+ set termguicolors
+endif
+
 " set ayucolor="light"  " for light version of theme
 " let ayucolor="mirage" " for mirage version of theme
 " let ayucolor="dark"   " for dark version of theme
@@ -78,6 +82,9 @@ set termguicolors     " enable true colors support
 
 set background=light
 colorscheme PaperColor
+
+" set background=dark
+" colorscheme OceanicNext
 
 
 
@@ -111,7 +118,7 @@ set nocompatible                                            " 不要兼容vi
 "set clipboard=unnamed
 set clipboard=unnamedplus
 set updatetime=100
-syntax on                                                   "
+syntax enable                                                 "
 
 
 """""""""""""""""""""""""""""""""""""""
@@ -240,6 +247,7 @@ local on_attach = function(client, bufnr)
   if client.resolved_capabilities.document_range_formatting then
     buf_set_keymap("v", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   end
+  vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()]]
 
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
@@ -429,7 +437,7 @@ require('telescope').setup{
 
 EOF
 nnoremap <leader>F <cmd>Telescope find_files<cr>
-nnoremap <leader>b <cmd>Telescope buffers<cr>
+nnoremap <leader>b <cmd>History<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 
 nnoremap <leader>z <cmd>lua require('telescope.builtin').lsp_document_symbols(require('telescope.themes').get_dropdown({symbols="method"}))<cr>
