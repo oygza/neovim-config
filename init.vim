@@ -23,6 +23,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'mhartington/oceanic-next'
 
+Plug 'projekt0n/github-nvim-theme'
+
 "" telescope
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -80,11 +82,24 @@ endif
 
 " set t_Co=256   " This is may or may not needed.
 
-set background=light
-colorscheme PaperColor
+" set background=light
+" colorscheme PaperColor
 
 " set background=dark
 " colorscheme OceanicNext
+
+"""""""""""""""""""""""""""""""""""""""
+"           theme config              "
+"""""""""""""""""""""""""""""""""""""""
+
+lua << EOF
+require("github-theme").setup({
+  functionStyle = "italic",
+  themeStyle = "dark",
+  sidebars = {"qf", "vista_kind", "terminal", "packer"},
+  colors = {hint = "orange", error = "#ff0000"}
+})
+EOF
 
 
 
@@ -247,7 +262,8 @@ local on_attach = function(client, bufnr)
   if client.resolved_capabilities.document_range_formatting then
     buf_set_keymap("v", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
   end
-  vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()]]
+  -- 自动格式化代码 --- 不好用
+  -- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()]]
 
   -- Set autocommands conditional on server_capabilities
   if client.resolved_capabilities.document_highlight then
