@@ -30,6 +30,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
+Plug 'vim-test/vim-test'
 
 
 
@@ -135,6 +136,9 @@ set clipboard=unnamedplus
 set updatetime=100
 syntax enable                                                 "
 
+" php unit test
+nmap <leader>tn :TestNearest<CR>
+let test#strategy = "neovim"
 
 """""""""""""""""""""""""""""""""""""""
 "           nerdtree config           "
